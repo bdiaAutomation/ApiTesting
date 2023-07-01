@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>POST a new user</name>
+   <name>UpdateUser</name>
    <tag></tag>
-   <elementGuidId>bf95ec44-8f74-4b67-854c-83a7e77af5f2</elementGuidId>
+   <elementGuidId>beee9c9f-40f6-4067-8431-587bdc928159</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <useRalativeImagePath>false</useRalativeImagePath>
+   <connectionTimeout>0</connectionTimeout>
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;age\&quot;: ${age},\n  \&quot;avatar\&quot;: null,\n  \&quot;gender\&quot;:\&quot;${gender}\&quot;,\n  \&quot;password\&quot;: \&quot;${password}\&quot;,\n  \&quot;username\&quot;: \&quot;${username}\&quot;\n}&quot;,
+  &quot;text&quot;: &quot;{\n    \&quot;name\&quot;: \&quot;${name}\&quot;,\n    \&quot;job\&quot;: \&quot;${restaurant}\&quot;\n}&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -20,42 +21,41 @@
       <name>Content-Type</name>
       <type>Main</type>
       <value>application/json</value>
+      <webElementGuid>045b1130-0cf4-45d4-9b7c-a2b47e7ef9f3</webElementGuid>
    </httpHeaderProperties>
+   <katalonVersion>8.5.5</katalonVersion>
+   <maxResponseSize>0</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
-   <restRequestMethod>POST</restRequestMethod>
-   <restUrl>${GlobalVariable.baseUrl}/api/users/json</restUrl>
+   <restRequestMethod>PUT</restRequestMethod>
+   <restUrl>${GlobalVariable.uri}/api/users/${id}</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
    <soapRequestMethod></soapRequestMethod>
+   <soapServiceEndpoint></soapServiceEndpoint>
    <soapServiceFunction></soapServiceFunction>
+   <socketTimeout>0</socketTimeout>
+   <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
    <variables>
-      <defaultValue>18</defaultValue>
+      <defaultValue>'500'</defaultValue>
       <description></description>
-      <id>0ff0fdb5-ffe2-454e-8cf9-c2d44e21ddac</id>
+      <id>b9383fd0-9dd7-4c93-95f8-86e90a0b2ac2</id>
       <masked>false</masked>
-      <name>age</name>
+      <name>id</name>
    </variables>
    <variables>
-      <defaultValue>'MALE'</defaultValue>
+      <defaultValue>'Bamba'</defaultValue>
       <description></description>
-      <id>7c77cd5e-e69d-4bf6-bf4c-242ca104081c</id>
+      <id>1ab98a71-2c22-4816-8c73-c98cdb0d393d</id>
       <masked>false</masked>
-      <name>gender</name>
+      <name>name</name>
    </variables>
    <variables>
-      <defaultValue>'mimi'</defaultValue>
+      <defaultValue>'zion resident'</defaultValue>
       <description></description>
-      <id>30565e15-eece-49b1-8159-ac9a99a956aa</id>
+      <id>13b9c583-8e01-4852-a13c-8fac0b71d09e</id>
       <masked>false</masked>
-      <name>username</name>
-   </variables>
-   <variables>
-      <defaultValue>'123456789'</defaultValue>
-      <description></description>
-      <id>303e8db4-748d-4300-878d-05ef1956d9b6</id>
-      <masked>false</masked>
-      <name>password</name>
+      <name>restaurant</name>
    </variables>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
@@ -64,14 +64,19 @@ import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webservice.verification.WSResponseManager
 
+import groovy.json.JsonSlurper
 import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
+
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
-assert response.getStatusCode() == 200
-WS.verifyElementPropertyValue(response, &quot;age&quot;, 25)
-WS.verifyElementPropertyValue(response, &quot;username&quot;, &quot;mimi&quot;)
-WS.verifyElementPropertyValue(response, &quot;password&quot;, &quot;123456789&quot;)
-WS.verifyElementPropertyValue(response, &quot;gender&quot;, &quot;MALE&quot;)</verificationScript>
+
+
+
+WS.verifyResponseStatusCode(response, 200)
+
+assertThat(response.getStatusCode()).isEqualTo(200)
+
+</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
